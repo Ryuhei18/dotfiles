@@ -36,8 +36,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " call PlugInstall to install new plugins
 call plug#end()
 
-source ~/.config/nvim/plugins/nvim-tree.vim
-
 lua << EOF
 require("CopilotChat").setup {
   -- See Configuration section for options
@@ -47,6 +45,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 require("nvim-web-devicons").setup()
+require("gitsigns").setup()
 
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
@@ -112,6 +111,11 @@ nnoremap ffg <cmd>Telescope live_grep<cr>
 nnoremap ffb <cmd>Telescope buffers<cr>
 nnoremap ffh <cmd>Telescope help_tags<cr>
 
+nnoremap <leader>n :NvimTreeFocus<CR>
+nnoremap <C-t> :NvimTreeToggle<CR>
+nnoremap <C-n> :NvimTreeOpen<CR>
+nnoremap <C-f> :NvimTreeFindFile<CR>
+
 nnoremap <silent> tt <cmd>term<CR><C-\><C-N>
 nnoremap <silent> tt <cmd>belowright new<CR><cmd>term<CR><C-\><C-N>
 nnoremap <silent> te <cmd>tabnew<CR>
@@ -121,6 +125,16 @@ nnoremap vs <cmd>vsplit<CR><C-w>w
 
 nnoremap <C-w><C-w> gt
 nnoremap <C-w>e gT
+
+nnoremap diw ciw
+nnoremap ciw diw
+nnoremap xiw ciw
+
+nnoremap dd d^d$
+nnoremap cc dd
+
+nnoremap x<up> ddkP
+nnoremap x<down> ddp
 
 tnoremap <Esc> <C-\><C-N>
 tnoremap fff <C-w><C-n><C-w><C-w><C-\><C-N>:Telescope find_files hidden=true<cr>
@@ -135,6 +149,7 @@ vnoremap <Tab><S-Tab> <<gv
 inoremap :wq <Esc>:wq
 inoremap :w <Esc>:w
 inoremap :q! <Esc>:q!
+
 nnoremap <S-down> v<down>
 nnoremap <S-left> v<left>
 nnoremap <S-up> v<up>
