@@ -1,0 +1,16 @@
+{
+  "languageserver": {
+    "rubocop": {
+      "command": "bundle",
+      "args": [
+        "exec",
+        "rubocop",
+        "--lsp"
+      ],
+      "filetypes": [
+        "ruby"
+      ]
+    }
+  },
+  "coc.preferences.formatOnSave": true
+}
