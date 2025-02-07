@@ -43,6 +43,9 @@ local options = {
 }
 
 vim.opt.shortmess:append("c")
+vim.opt.termguicolors = true
+vim.opt.winblend = 0
+vim.opt.pumblend = 0
 
 for k, v in pairs(options) do
   vim.opt[k] = v
