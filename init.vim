@@ -1,12 +1,10 @@
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'nvim-lua/plenary.nvim'
-Plug 'svrana/neosolarized.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'scrooloose/syntastic'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -24,6 +22,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'zbirenbaum/copilot.lua'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'Tsuzat/NeoSolarized.nvim', { 'branch': 'master' }
 
 " for the rails settings
 Plug 'tpope/vim-rails'
@@ -41,6 +40,8 @@ require("CopilotChat").setup {
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
+vim.opt.winblend = 0
+vim.opt.pumblend = 0
 
 require("nvim-web-devicons").setup()
 require("gitsigns").setup()
@@ -72,32 +73,61 @@ local function open_nvim_tree()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-EOF
 
-set tabstop=2
-set shiftwidth=2
+require("NeoSolarized").setup {
+  style = "dark", -- "dark" or "light"
+  transparent = true,
+  terminal_colors = true,
+  enable_italics = true,
+  styles = {
+    sidebars = "transparent",
+    floats = "transparent",
+  },
+}
+vim.cmd([[colorscheme NeoSolarized]])
+EOF
+set encoding+=utf-8
+set fileencoding+=utf-8
 set title
-set noshowmode
-set wildmenu
-set ruler
-set showmatch
-set foldlevel=100
-set encoding=utf-8
+set clipboard+=unnamedplus
+set cmdheight=2
+set completeopt+={ 'menuone', 'noselect' }
+set conceallevel=0
+set hlsearch
+set ignorecase
+set pumheight=10
+set smartcase
+set smartindent
+set termguicolors
+set timeoutlen=300
+set undofile
+set updatetime=300
+set shell+=fish
+set backupskip+={ '/tmp/*', '/private/tmp/*' }
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set cursorline
+set number
+set numberwidth=4
+set signcolumn+=yes
+set winblend=0
+set wildoptions+=pum
+set pumblend=5
+set background+=dark
+set scrolloff=8
+set sidescrolloff=8
+set guifont+=monospace:h17
+
 scriptencoding utf-8
-set fileencodings=utf-8,ucs-bom
-set laststatus=2
 syntax enable
 syntax on
 filetype plugin indent on
 
 execute pathogen#infect()
 
-set expandtab
-set hlsearch
 set incsearch
-set smartcase
 set smarttab
-set number
 set laststatus=2
 
 set statusline+=%#warningmsg#
@@ -148,31 +178,31 @@ inoremap :wq <Esc>:wq
 inoremap :w <Esc>:w
 inoremap :q! <Esc>:q!
 
-nnoremap <S-down> v<down>
-nnoremap <S-left> v<left>
-nnoremap <S-up> v<up>
-nnoremap <S-right> v<right>
-
-vnoremap <S-down> <down>
-vnoremap <S-up> <up>
-vnoremap <S-left> <left>
-vnoremap <S-right> <right>
-
 nnoremap <A-up> {
 nnoremap <A-down> }
-nnoremap <A-right> <S-right>
-nnoremap <A-left> <S-left>
+nnoremap <A-right> e
+nnoremap <A-left> b
 
-nnoremap <A-S-up> yyP
-nnoremap <A-S-down> yyp
-vnoremap <A-S-up> yP
-vnoremap <A-S-down> yp
+nnoremap <A-]> <cmd>horizontal resize +5<CR>
+nnoremap <A-[> <cmd>horizontal resize -5<CR>
+nnoremap <A-}> <cmd>vertical resize +5<CR>
+nnoremap <A-{> <cmd>vertical resize -5<CR>
+
+nnoremap <A-S-down> v}
+nnoremap <A-S-left> vb
+nnoremap <A-S-right> ve
+nnoremap <A-S-up> v{
+
+vnoremap <A-S-down> }
+vnoremap <A-S-up> {
+vnoremap <A-S-left> b
+vnoremap <A-S-right> e
 
 nnoremap c<up> dd
 nnoremap c<down> dd
 
 autocmd TermOpen * :startinsert
-autocmd TermOpen * setlocal norelativenumbeR
+autocmd TermOpen * setlocal norelativenumber
 autocmd TermOpen * setlocal nonumber
 
 set mouse=
