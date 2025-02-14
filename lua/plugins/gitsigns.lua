@@ -1,19 +1,19 @@
 require('gitsigns').setup {
   signs = {
-    add = 
-    change = 
-    delete 
-    topdelete
-    changedelete
-    untracked
+    add          = { text = '┃' },
+    change       = { text = '┃' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
-  signs_stages = {
-    add = 
-    change = 
-    delete = 
-    topdelete 
-    changedelete
-    untracker
+  signs_staged = {
+    add          = { text = '┃' },
+    change       = { text = '┃' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
   },
   signs_staged_enable = true,
   signcolumn = true,

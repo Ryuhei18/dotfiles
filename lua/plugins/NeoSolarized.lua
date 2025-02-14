@@ -7,8 +7,8 @@ end
 -- Default Setting for NeoSolarized
 
 NeoSolarized.setup {
-  style = "light",
-  transparent = false,
+  style = "dark",
+  transparent = true,
   terminal_colors = true,
   enable_italics = true,
   styles = {
@@ -30,7 +30,7 @@ NeoSolarized.setup {
 vim.cmd([[
   try
     colorscheme NeoSolarized
-  catch /^Vim\%((\a\+)\)\=:E18o
+  catch /^Vim\%((\a\+)\)\=:E185
     colorscheme default
     set background=dark
   endtry
