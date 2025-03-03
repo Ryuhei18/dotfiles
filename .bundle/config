@@ -1,3 +1,0 @@
----
-BUNDLE_BUILD__MYSQL2: "--with-opt-dir=/usr/local/opt/openssl@3"
-BUNDLE_BUILD__SQLITE3: "--with-sqlite3-dir=$HOME/sqlite3 --with-sqlite3-include=$HOME/sqlite3 --with-sqlite3-lib=$HOME/sqlite3/.libs/ --with-opt-dir=$HOME/sqlite3"
